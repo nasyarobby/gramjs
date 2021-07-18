@@ -373,6 +373,11 @@ function pickFileSize(sizes: Api.TypePhotoSize[], sizeType: string) {
         ) {
             return size;
         }
+
+        if(size instanceof Api.PhotoSizeProgressive) {
+            // add size property to size which is the maximum size available in size.sizes property
+            return {...size, size: size.sizes[size.sizes[size.sizes.length - 1]]}
+        }
     }
     return undefined;
 }
